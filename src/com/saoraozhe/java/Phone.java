@@ -1,4 +1,5 @@
-package com.saoraozhe;
+package com.saoraozhe.java;
+
 
 //继承抽象类，实现接口
 public class Phone extends Machine implements Caller{

@@ -7,4 +7,13 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  <!-- 通过servlet-name来匹配类和路径 -->
+  <servlet>
+      <servlet-name>MyServlet</servlet-name>
+      <servlet-class>com.saoraozhe.servlet.MyServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>MyServlet</servlet-name>
+      <url-pattern>/servlet</url-pattern>
+  </servlet-mapping>
 </web-app>

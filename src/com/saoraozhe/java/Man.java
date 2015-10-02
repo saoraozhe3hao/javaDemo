@@ -1,5 +1,6 @@
 //包声明
-package com.saoraozhe;
+package com.saoraozhe.java;
+
 
 //主类名称必须与文件名相同，public类，对其他java文件可见
 public class Man {

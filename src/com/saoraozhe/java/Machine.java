@@ -1,4 +1,4 @@
-package com.saoraozhe;
+package com.saoraozhe.java;
 
 //抽象类
 public abstract class Machine {

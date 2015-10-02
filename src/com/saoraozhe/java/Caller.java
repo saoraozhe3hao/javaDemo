@@ -1,4 +1,4 @@
-package com.saoraozhe;
+package com.saoraozhe.java;
 
 //接口
 public interface Caller {

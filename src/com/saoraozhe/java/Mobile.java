@@ -1,4 +1,5 @@
-package com.saoraozhe;
+package com.saoraozhe.java;
+
 
 //继承父类的所有成员
 public class Mobile extends Phone{
