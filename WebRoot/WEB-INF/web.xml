@@ -1,19 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" 
-	xmlns="http://java.sun.com/xml/ns/javaee" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-  <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
-  <!-- 通过servlet-name来匹配类和路径 -->
-  <servlet>
-      <servlet-name>MyServlet</servlet-name>
-      <servlet-class>com.saoraozhe.servlet.MyServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-      <servlet-name>MyServlet</servlet-name>
-      <url-pattern>/servlet</url-pattern>
-  </servlet-mapping>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+ <!-- 启动顺序，监听器、过滤器、servlet -->
+ 
+ <!-- 监听器配置 ，jsp的application,request,session（也即servlet中对应的对象）创建和变更时触发-->
+ <listener>
+  <listener-class>com.saoraozhe.servlet.MyListener</listener-class>
+ </listener>
+ <!-- 设置application的初始参数 -->
+ <context-param>
+     <param-name>initParam</param-name>
+     <param-value>value</param-value>
+ </context-param>
+  <!-- 设置session的超时时间，分钟为单位，0表示不超时 -->
+ <session-config>
+     <session-timeout>0</session-timeout>
+ </session-config>
+ 
+ 
+ <!-- 过滤器配置，路径模式匹配时触发，通过filter-name来匹配filter类和路径模式 -->
+ <filter>
+  <filter-name>MyFilter</filter-name>
+  <filter-class>com.saoraozhe.servlet.MyFilter</filter-class>
+  <!-- 传入过滤器init方法的初始化参数 -->
+  <init-param>
+   <param-name>price</param-name>
+   <param-value>10</param-value>
+  </init-param>
+ </filter>
+ <filter-mapping>
+  <filter-name>MyFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+  <!-- 过滤器的调度类型，请求REQUEST，请求转发FORWARD，出错ERROR，被<jsp:include>包含INCLUDE -->
+  <dispatcher>REQUEST</dispatcher>
+  <dispatcher>ERROR</dispatcher>
+ </filter-mapping>
+ 
+ 
+ <!-- servlet配置，通过servlet-name来匹配servlet类和路径 -->
+ <servlet>
+  <servlet-name>MyServlet</servlet-name>
+  <servlet-class>com.saoraozhe.servlet.MyServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>MyServlet</servlet-name>
+  <url-pattern>/servlet</url-pattern>
+ </servlet-mapping>
+ 
+ 
+ <!-- 错误页配置，出错时先会触发ERROR型的过滤器，再返回错误页 -->
+ <error-page>
+  <error-code>404</error-code>
+  <location>/error.jsp</location>
+ </error-page>
+ 
+ 
+ <!-- 首页配置 -->
+ <welcome-file-list>
+  <welcome-file>index.jsp</welcome-file>
+ </welcome-file-list>
 </web-app>

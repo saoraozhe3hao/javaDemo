@@ -24,9 +24,13 @@ public class MyServlet extends HttpServlet{
 		ServletContext application = this.getServletContext();
 		PrintWriter out = response.getWriter();
 		out.println("hello,world.");
+		System.out.println("Servlet");
 		//转发给JSP显示
 		request.setCharacterEncoding("utf-8");
+		//请求转发
 		request.getRequestDispatcher("index.jsp").forward(request,response);
+		//包含,相当于JSP的<jsp:include>
+		//request.getRequestDispatcher("index.jsp").forward(request,response);
 	}
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
     throws ServletException,IOException{

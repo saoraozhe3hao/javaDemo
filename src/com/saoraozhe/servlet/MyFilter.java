@@ -11,20 +11,22 @@ import javax.servlet.ServletResponse;
 
 public class MyFilter implements Filter{
 
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	public void doFilter(ServletRequest arg0, ServletResponse arg1,
-			FilterChain arg2) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
-		
+		//传入web.xml里面配置的初始化参数
 	}
 
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
+		System.out.println("doFilter start");		
+		//一给请求的过滤器链，由这个请求所匹配的过滤器组成，顺序与web.xml中的配置顺序相同
+		//过滤器链放行
+		chain.doFilter(request, response);
+		System.out.println("doFilter end");
+	}
+
+	public void destroy() {
+		
+	}
 }
