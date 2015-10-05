@@ -10,9 +10,9 @@ import java.sql.Statement;
 public class DBUtil {
 	
 	//该类的不同对象共用一份static成员
-	private static final String URL="jdbc:mysql://127.0.0.1:3306/hong";
+	private static final String URL="jdbc:mysql://localhost:3306/test";
 	private static final String USER="root";
-	private static final String PASSWORD="root";	
+	private static final String PASSWORD="";	
 	private static Connection conn=null;
 	
 	static {
@@ -34,13 +34,13 @@ public class DBUtil {
 	public static void main(String[] arg) throws Exception{
 		
 		//1、利用反射机制，加载驱动程序
-		Class.forName("com.mysql.jdbc.driver");
+		Class.forName("com.mysql.jdbc.Driver");
 		//2.获得数据库的连接
 		Connection connect = DriverManager.getConnection(URL,USER,PASSWORD);
 		//3.获得连接的声明
 		Statement state = connect.createStatement();
 		//3.通过声明的操作数据库，并获取结果
-		ResultSet result = state.executeQuery("select name from student");
+		ResultSet result = state.executeQuery("select name from user");
 		
 		while(result.next()){
 			System.out.println(result.getString("name"));
