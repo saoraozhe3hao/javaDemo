@@ -17,7 +17,11 @@ public class DBUtil {
 	
 	static {
 		try {
+			//forName 是 Class类 的静态方法，按类名返回并记录一个Class 的对象
+			//这个Class 的对象即Driver.class，或Driver.getClass()
+			//Driver.class.newInstance() 相当于 new Driver()
 			Class.forName("com.mysql.jdbc.Driver");
+			//getConnection 是 DriverManager 类的静态方法，会先Driver.class.newInstance()
 			conn=DriverManager.getConnection(URL, USER, PASSWORD);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -27,6 +31,7 @@ public class DBUtil {
 	}
 	//静态方法，能直接通过类名来调用
 	public static Connection getConnection(){
+		//单例模式
 		return conn;
 	}
 	

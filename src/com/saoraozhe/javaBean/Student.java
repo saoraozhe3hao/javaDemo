@@ -1,6 +1,6 @@
 package com.saoraozhe.javaBean;
 
-//符合javaBean 特征的java类就是javaBean
+//符合javaBean 特征的java类就是javaBean, 用在JSP动作标签
 public class Student{
 	//javaBean特征：成员变量私有
 	private int age = 9;
