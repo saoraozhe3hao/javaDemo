@@ -7,7 +7,9 @@
   Student student = new Student();
   //读取cookie
   Cookie[] cookies = request.getCookies();
-  out.println(cookies[0].getValue());
+  if(cookies != null){
+      out.println(cookies[0].getValue());
+  }
   Cookie cookie = new Cookie("lang","zh");
   cookie.setValue("en");
   //保存cookie项到浏览器
