@@ -39,7 +39,7 @@ ServletContextAttributeListener,HttpSessionAttributeListener,ServletRequestAttri
 	//HttpSessionListener 的方法
 	public void sessionCreated(HttpSessionEvent event) {
 		HttpSession session = event.getSession();
-		System.out.println("sessionCreated");
+		System.out.println("sessionCreated" + session.getAttribute("name"));
 	}
 	//HttpSessionListener 的方法
 	public void sessionDestroyed(HttpSessionEvent event) {
@@ -48,8 +48,8 @@ ServletContextAttributeListener,HttpSessionAttributeListener,ServletRequestAttri
 
 	//ServletRequestListener 的方法
 	public void requestInitialized(ServletRequestEvent event) {
-		System.out.println("requestInitialized");
 		ServletRequest request = event.getServletRequest();
+		System.out.println("requestInitialized" + request.getAttribute("name"));
 	}
 
 	//ServletRequestListener 的方法

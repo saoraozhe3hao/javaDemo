@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 public class MyServlet extends HttpServlet{
 	
+	private static final long serialVersionUID = 1L;
 	public void init() throws ServletException{
 		
 	}
@@ -20,11 +21,12 @@ public class MyServlet extends HttpServlet{
 	throws ServletException,IOException {
 		//相当于JSP的内置对象session
 		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("name"));
 		//相当于JSP的内置对象application
 		ServletContext application = this.getServletContext();
+		System.out.println(application.getAttribute("name"));
 		PrintWriter out = response.getWriter();
 		out.println("hello,world.");
-		System.out.println("Servlet");
 		//转发给JSP显示
 		request.setCharacterEncoding("utf-8");
 		//请求转发
