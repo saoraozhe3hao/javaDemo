@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<!-- 可以用include引入同格式文件 -->
+<struts>
+
+	<!-- 一个package，匹配一个URL的路径部分。namespace即url的路径为/appName/struts。 -->
+	<!-- extends继承的struts-default包在 struts-core.jar/struts-default.xml中，里面定义了一些内置拦截器和拦截器栈，并指定了默认引用的拦截器栈（defaultStack） -->
+	<package name="default" namespace="/struts" extends="struts-default">
+
+		<!-- 注册拦截器 -->
+		<interceptors>
+			<interceptor name="myInterceptor" class="com.saoraozhe.struts.MyInterceptor"></interceptor>
+			<!-- 拦截器栈，拦截器的组合，用法与拦截器相同 -->
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="myInterceptor" />
+			</interceptor-stack>
+		</interceptors>
+
+
+		<!--URL末尾不匹配时的 默认action -->
+		<default-action-ref name="myAction"></default-action-ref>
+
+
+
+		<!-- 全局结果页 -->
+		<global-results>
+			<!-- name 即匹配action方法中的return的值 -->
+			<result name="error">/error.jsp</result>
+		</global-results>
+
+		<!-- 一个action匹配一个URL的末尾，name即url的末尾为myAction.action -->
+		<!-- class即处理该action的类，默认的处理方法为execute -->
+		<action name="myAction" class="com.saoraozhe.struts.MyAction">
+			<result>/index.jsp</result>
+			<!-- action中可以获取的参数 -->
+			<param name="param">value</param>
+		</action>
+		<!-- method指定处理该action的类中的方法 -->
+		<action name="addAction" method="add" class="com.saoraozhe.struts.MyAction">
+			<result>/index.jsp</result>
+			<!-- 引用拦截器，自行指定拦截器后，默认的拦截器栈（defaultStack）不再生效 -->
+			<interceptor-ref name="myInterceptor"></interceptor-ref>
+		</action>
+		<!-- 用URL里的参数来动态匹配action方法，即/curl_add 匹配 add( ) 。参数可以多个 -->
+		<action name="curl_*" method="{1}" class="com.saoraozhe.struts.MyAction">
+			<result>/{1}.jsp</result>
+		</action>
+	</package>
+	<!-- 设置常量 -->
+	<constant name="constant" value="1"></constant>
+</struts>    

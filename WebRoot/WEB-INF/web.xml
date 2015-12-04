@@ -59,4 +59,16 @@
  <welcome-file-list>
   <welcome-file>index.jsp</welcome-file>
  </welcome-file-list>
-</web-app>
+ 
+ <!-- Struts过滤器，即Struts的入口。Struts的主配置文件为src/struts.xml -->
+ <filter>
+ 	<filter-name>struts2</filter-name>
+ 	<filter-class>
+ 		org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter
+ 	</filter-class>
+ </filter>
+ <filter-mapping>
+ 	<filter-name>struts2</filter-name>
+ 	<!-- Struts过滤的目标URL -->
+ 	<url-pattern>*.action</url-pattern>
+ </filter-mapping></web-app>
