@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+	    <!-- 连接数据库 -->    
+        <property name="connection.username">root</property>
+        <property name="connection.password"></property>  
+        <property name="connection.url">jdbc:mysql://127.0.0.1:3306/hibernate?useUnicode=true&amp;characterEncoding=UTF-8</property>  
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>  
+        <!-- 连接数据库 end--> 
+        <!-- 配置数据库方言 -->  
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>  
+        <!-- 配置数据库方言end -->  
+        <!-- sql语句打印到控制台 -->  
+        <property name="show_sql">true</property>  
+        <property name="format_sql">true</property>  
+        <!-- sql语句打印到控制台 end-->   
+        <!-- 配置线程安全的session -->    
+        <property name="hibernate.current_session_context_class">thread</property>  
+        <!-- 配置线程安全的session end-->  
+        <!-- create 每次访问都会重新创建，update 只能更新不会自动创建--> 
+        <property name="hbm2ddl.auto">create</property>
+        <!-- 指定实体类与数据表的映射配置文件 -->
+        <mapping resource="com/saoraozhe/hibernate/hibernate.hbm.xml" /> 
+	</session-factory>
+</hibernate-configuration>

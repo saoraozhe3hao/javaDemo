@@ -60,7 +60,7 @@
   <welcome-file>index.jsp</welcome-file>
  </welcome-file-list>
  
- <!-- Struts过滤器，即Struts的入口。Struts的主配置文件为src/struts.xml -->
+ <!-- Struts过滤器，即Struts的入口。Struts的主配置文件为src/struts.xml。本例用的Struts版本为2.2.1 -->
  <filter>
  	<filter-name>struts2</filter-name>
  	<filter-class>

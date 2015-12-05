@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="D:/program/apache-tomcat/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="D:/program/apache-tomcat/lib/jsp-api.jar"/>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.struts2.MYECLIPSE_STRUTS21_CORE"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/hibernate4"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
