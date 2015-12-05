@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+	<class name="com.saoraozhe.hibernate.entity.Employee"  table="employee">
+		<id name="eid"  column="eid"  type="int">
+			<generator class="increment" />
+		</id>
+		<property name="ename"  type="java.lang.String">
+		    <!-- 指定不能最大长度，和能否为空 -->
+		    <column name="ename"  length="20"  not-null="true"/>
+		</property>
+		<property name="sex"  type="java.lang.String">
+		    <column name="sex" />
+		</property>
+		<!--  多对一 关联关系 配置，指定关联的成员、关联的表、外键列名-->
+		<!-- cascade : 默认none,不级联；save-update,更新时级联；delete，删除时级联；all,所有操作都级联。级联指操作多方时，一并操作其关联的一方实体 -->
+		<many-to-one name="company"  class="com.saoraozhe.hibernate.entity.Company"  column="cid" cascade="none"></many-to-one>
+	</class>
+	
+</hibernate-mapping>

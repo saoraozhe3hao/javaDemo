@@ -1,4 +1,4 @@
-package com.saoraozhe.hibernate;
+package com.saoraozhe.hibernate.entity;
 
 public class Address{
 	

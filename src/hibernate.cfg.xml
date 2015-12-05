@@ -21,8 +21,10 @@
         <property name="hibernate.current_session_context_class">thread</property>  
         <!-- 配置线程安全的session end-->  
         <!-- create 每次访问都会重新创建，update 只能更新不会自动创建--> 
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
         <!-- 指定实体类与数据表的映射配置文件 -->
-        <mapping resource="com/saoraozhe/hibernate/hibernate.hbm.xml" /> 
+        <mapping resource="com/saoraozhe/hibernate/entity/student.hbm.xml" /> 
+        <mapping resource="com/saoraozhe/hibernate/entity/company.hbm.xml" /> 
+        <mapping resource="com/saoraozhe/hibernate/entity/employee.hbm.xml" /> 
 	</session-factory>
 </hibernate-configuration>

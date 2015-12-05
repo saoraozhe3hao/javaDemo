@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+
+	<class name="com.saoraozhe.hibernate.entity.Company"  table="company">
+		<id name="cid"  column="cid"  type="int">
+		    <!-- increment即hibernate从数据查询最大ID后 加一生成 -->
+			<generator class="increment" />
+		</id>
+		<property name="cname"  type="java.lang.String">
+		    <column name="cname"/>
+		</property>
+		<!--  一对多 关联关系 配置，指定集合成员、关联的表、关联的类-->
+		<!-- cascade : 默认none,不级联；save-update,更新时级联；delete，删除时级联；all,所有操作都级联。级联指操作一方时，一并操作其关联的多方实体 -->
+		<set name="employees"  table="employee" cascade="none">
+		    <!-- 指定关联的外键 -->
+		    <key column="cid"></key>
+		    <one-to-many class="com.saoraozhe.hibernate.entity.Employee"></one-to-many>
+		</set>
+	</class>
+	
+</hibernate-mapping>

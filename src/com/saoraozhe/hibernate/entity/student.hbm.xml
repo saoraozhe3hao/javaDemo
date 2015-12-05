@@ -3,14 +3,14 @@
             "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 <!-- 文件名里的hbm 即 hibernate mapping -->
 <!-- package即实体类所在的包 -->
-<hibernate-mapping package="com.saoraozhe.hibernate">
+<hibernate-mapping package="com.saoraozhe.hibernate.entity">
 
     <!-- 类名与表名的对应关系 -->
 	<class name="Student"  table="STUDENTS">
 	    <!-- 成员名与列名的对应关系 -->
 		<id name="sid"  type="int">
 		   <column name="SID"/>
-		   <!-- 序列号生成策略 -->
+		   <!-- 序列号生成策略,native即数据库生成-->
 			<generator class="native" />
 		</id>
 		<property name="age">

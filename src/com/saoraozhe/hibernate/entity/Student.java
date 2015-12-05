@@ -1,4 +1,5 @@
-package com.saoraozhe.hibernate;
+package com.saoraozhe.hibernate.entity;
+
 
 //Hibernate的实体类（持久化类）符合javaBean 特征
 public class Student{
