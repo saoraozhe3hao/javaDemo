@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace加下面指令标签的 id ，唯一标示一条sql指令 -->
+<mapper namespace="Message">
+
+  <!-- 配置对象的成员与表列的映射关系 -->
+  <resultMap type="com.saoraozhe.mybatis.entity.Message"  id="MessageMap">
+    <id column="MID" jdbcType="INTEGER" property="mid"/>
+    <result column="CONTENT" jdbcType="VARCHAR" property="content"/>
+    <result column="TID"  jdbcType="INTEGER" property="tid"/>
+    <!--  多对一 关联关系 配置，指定关联的成员、一方实体类的映射-->
+    <association property="type" resultMap="MessageType.typeMap"></association>
+  </resultMap>
+
+  <!-- resultMap指定resultMap标签，即结果集的各列与（接收结果集的对象的）成员的映射关系 -->
+  <!-- parameterType指定查询参数，只能有一个参数 -->
+  <select id="queryMessageList" parameterType="com.saoraozhe.mybatis.entity.Message" resultMap="MessageMap">
+    select MID,CONTENT from MESSAGE
+    <!-- 过滤条件拼接 -->
+    <where>
+        <!-- <if> 和 #{ } 为OGNL表达式 -->
+        <!-- OGNL表达式：获取成员、调用成员的方法。 &quot; 是引号的转义符-->
+    	<if test="content != null and !&quot;&quot;.equals(content.trim())">
+	    	and CONTENT  like '%' #{content} '%' 
+	    </if>
+    </where>
+  </select>
+  
+  <!-- resultMap指定这条语句要返回的对象的类型 -->
+	<select id="queryMessageType" parameterType="com.saoraozhe.mybatis.entity.Message"
+		resultMap="MessageMap">
+		<!-- include引用常量 -->
+		select <include refid="columns"></include>
+		from MESSAGE_TYPE t left join MESSAGE m
+		on t.TID=m.TID
+		<where>
+			<if test="content != null and !&quot;&quot;.equals(content.trim())">
+				and m.CONTENT  like '%' #{content} '%' 
+			</if>
+		</where>
+	</select>
+  
+  <!-- OGNL表达式：获取基本类型-->
+  <delete id="deleteOne" parameterType="int">
+  	delete from MESSAGE where MID = #{_parameter}
+  </delete>
+  
+    <!-- <foreach> 为OGNL表达式，获取list元素 -->
+  <delete id="deleteBatch" parameterType="java.util.List">
+  	delete from MESSAGE where MID in(
+  		<foreach collection="list" item="item" separator=",">
+  			#{item}
+  		</foreach>
+  	)
+  </delete>
+  <sql id="columns">t.TID T_ID,t.TNAME,m.MID,m.CONTENT,m.TID</sql>
+</mapper>

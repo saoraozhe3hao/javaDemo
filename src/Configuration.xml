@@ -5,19 +5,25 @@
 
 <configuration>
 
-    <!-- 链接信息 -->
+	<!-- 链接信息 -->
 	<environments default="development">
 		<environment id="development">
 			<transactionManager type="JDBC">
 				<property name="" value="" />
 			</transactionManager>
 			<dataSource type="UNPOOLED">
-				<property name="driver" value="org.hsqldb.jdbcDriver" />
-				<property name="url" value="jdbc:mysql://127.0.0.1:3306/hibernate" />
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://127.0.0.1:3306/mybatis" />
 				<property name="username" value="root" />
 				<property name="password" value="" />
 			</dataSource>
 		</environment>
 	</environments>
-
+	
+	<!-- 配置映射文件，映射文件里除了配置映射，还有sql语句相关配置 -->
+	<mappers>
+	    <mapper resource="com/saoraozhe/mybatis/entity/MessageType.xml" />
+		<mapper resource="com/saoraozhe/mybatis/entity/Message.xml" />
+	</mappers>
+	
 </configuration>

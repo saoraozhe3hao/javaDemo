@@ -10,8 +10,6 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
-
-import com.saoraozhe.hibernate.entity.Address;
 import com.saoraozhe.hibernate.entity.Student;
 
 //该类是用于测试Student表的入口，本例用的Hibernate版本4.3.11

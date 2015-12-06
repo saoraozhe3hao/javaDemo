@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MessageType">
+	<resultMap type="com.saoraozhe.mybatis.entity.MessageType"
+		id="typeMap">
+		<id column="T_ID"  jdbcType="INTEGER" property="tid" />
+		<result column="TNAME"  jdbcType="VARCHAR" property="tname" />
+		<!-- 一对多关系中，指定集合成员 和 映射配置的关系，即集合成员、多方实体类，多方表 的关系 -->
+		<collection property="messages" resultMap="Message.MessageMap" />
+	</resultMap>
+
+    <!-- resultMap指定这条语句要返回的对象的类型 -->
+	<select id="queryMessageList" parameterType="com.saoraozhe.mybatis.entity.MessageType"
+		resultMap="typeMap">
+		<!-- include引用常量 -->
+		select <include refid="columns"></include>
+		from MESSAGE_TYPE t left join MESSAGE m
+		on t.TID=m.TID
+		<where>
+			<if test="tname != null and !&quot;&quot;.equals(tname.trim())">
+				and t.TNAME=#{tname}
+			</if>
+		</where>
+	</select>
+	
+    <!-- sql标签定义常量 -->
+    <!-- select 子句中，给列取别名，避免重复。from子句和join子句中，给表取别名，简化sql语句 -->
+	<sql id="columns">t.TID T_ID,t.TNAME,m.MID,m.CONTENT,m.TID</sql>
+</mapper>

@@ -1,13 +1,11 @@
 package com.saoraozhe.hibernate;
 
-import java.util.Set;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import com.saoraozhe.hibernate.entity.Company;
 import com.saoraozhe.hibernate.entity.Employee;
 
-//多对一关联，多方有一个成员是 一方实体对象，在一方hbm.xml中配有many-to-one
+//多对一关联，多方有一个成员是 一方实体对象，在多方hbm.xml中配有many-to-one
 public class ManyToOneTest {
 
 	public static void main(String[] arg) throws Exception {

@@ -1,10 +1,19 @@
 package com.saoraozhe.struts;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts2.interceptor.ServletRequestAware;
+import org.apache.struts2.interceptor.ServletResponseAware;
+import org.apache.struts2.util.ServletContextAware;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.saoraozhe.javaBean.Student;
 
-public class MyAction extends ActionSupport implements ModelDriven<Student> {
+public class MyAction extends ActionSupport implements ModelDriven<Student>,ServletRequestAware,ServletResponseAware,ServletContextAware {
 
 	//定义成员用于自动接收struts.xml里面设置的action参数，需要有getter( )和setter( )
 	private String param;
@@ -15,6 +24,11 @@ public class MyAction extends ActionSupport implements ModelDriven<Student> {
 	//定义对象成员，用于接收参数 xxx，自动塞到studentModel，需实现ModelDriven<T>接口getModel( )
    private Student studentModel = new Student();
    //以上注释里的动作，由默认的内置拦截器栈完成，即struts-default.xml里的defaultStack
+  
+   private HttpServletRequest request;
+   private HttpServletResponse response;
+   private HttpSession session;
+   private ServletContext context;
    
 	
 	@Override
@@ -32,6 +46,20 @@ public class MyAction extends ActionSupport implements ModelDriven<Student> {
 		System.out.println(username);
 		System.out.println("add");
 		return SUCCESS;
+	}
+	
+	 //实现接口ServletRequestAware，ServletResponseAware，ServletContextAware的方法，会被自动调用，并传入请求，响应和上下文
+	public void setServletContext(ServletContext context) {
+		this.context = context;
+	}
+
+	public void setServletResponse(HttpServletResponse response) {
+		this.response = response;
+	}
+
+	public void setServletRequest(HttpServletRequest request) {
+		this.request = request;
+		this.session = request.getSession();
 	}
 	
 	public Student getModel() {
