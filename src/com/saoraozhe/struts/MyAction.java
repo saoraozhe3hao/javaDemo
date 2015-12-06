@@ -49,6 +49,7 @@ public class MyAction extends ActionSupport implements ModelDriven<Student>,Serv
 	}
 	
 	 //实现接口ServletRequestAware，ServletResponseAware，ServletContextAware的方法，会被自动调用，并传入请求，响应和上下文
+	//这就是依赖注入
 	public void setServletContext(ServletContext context) {
 		this.context = context;
 	}

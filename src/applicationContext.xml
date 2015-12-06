@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	<!-- bean 配置文件，在代码中通过bean的id获取bean对象 -->
+	<!-- scope 指定作用域，默认singleton，单例；prototype，每次新建； -->
+	<bean id="employee" class="com.saoraozhe.spring.bean.Employee"
+		scope="singleton">
+		<!-- 设置构造器注入的参数值，index 和 type可以不写 -->
+		<constructor-arg value="hong" index="0" type="java.lang.String"></constructor-arg>
+		<property name="age" value="1"></property>
+	</bean>
+
+	<!-- 一个class可以配置多个bean，id不一样 -->
+	<bean id="company1" class="com.saoraozhe.spring.bean.Company">
+		<property name="name" value="huawei"></property>
+		<!-- 对象成员，引用bean -->
+		<property name="employee" ref="employee"></property>
+		<!-- 集合成员 -->
+		<property name="employees">
+			<list>
+				<ref bean="employee" />
+				<ref bean="employee" />
+			</list>
+		</property>
+		<!-- 级联赋值 -->
+		<property name="employee.age" value="34"></property>
+	</bean>
+
+	<bean id="company2" class="com.saoraozhe.spring.bean.Company">
+		<property name="name" value="huawei"></property>
+		<!-- 对象成员，内部bean -->
+		<property name="employee">
+			<bean class="com.saoraozhe.spring.bean.Employee">
+				<!-- 赋null值 -->
+				<property name="name">
+					<null />
+				</property>
+				<property name="age" value="2"></property>
+			</bean>
+		</property>
+		<!-- Map成员 -->
+		<property name="employeeMap">
+			<map>
+				<entry key="hong" value-ref="employee" />
+				<entry key="zhen" value-ref="employee" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- 属性注入的简写方式，需导入 xmlns:p="http://www.springframework.org/schema/p" -->
+	<bean id="company3" class="com.saoraozhe.spring.bean.Company"
+		p:name="huawei" p:employee-ref="employee">
+	</bean>
+
+	<!-- 继承parent的配置，abstract不能被实例化 -->
+	<bean id="employee1" parent="employee" abstract="true">
+	</bean>
+
+</beans>
