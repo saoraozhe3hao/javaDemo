@@ -12,6 +12,7 @@
 		<!-- 设置构造器注入的参数值，index 和 type可以不写 -->
 		<constructor-arg value="hong" index="0" type="java.lang.String"></constructor-arg>
 		<property name="age" value="1"></property>
+		<property name="salary" value="10000"></property>
 	</bean>
 
 	<!-- 一个class可以配置多个bean，id不一样 -->
@@ -28,6 +29,8 @@
 		</property>
 		<!-- 级联赋值 -->
 		<property name="employee.age" value="34"></property>
+		<!-- #{ }里为SpEL，Spring 表达式语言 -->
+		<property name="welfare" value="#{employee.salary >= 10000?'good':'bad'}"></property>
 	</bean>
 
 	<bean id="company2" class="com.saoraozhe.spring.bean.Company">
@@ -52,12 +55,35 @@
 	</bean>
 
 	<!-- 属性注入的简写方式，需导入 xmlns:p="http://www.springframework.org/schema/p" -->
+	<!-- bean 生命周期，init-method构建后创建，destroy-method销毁前调用  -->
 	<bean id="company3" class="com.saoraozhe.spring.bean.Company"
-		p:name="huawei" p:employee-ref="employee">
+		p:name="huawei" p:employee-ref="employee"  init-method="onInit"  destroy-method="onDestroy">
 	</bean>
 
 	<!-- 继承parent的配置，abstract不能被实例化 -->
 	<bean id="employee1" parent="employee" abstract="true">
 	</bean>
 
+    <!-- 配置bean初始化前置后置处理器 -->
+    <bean class="com.saoraozhe.spring.MyBeanPostProcessor"></bean>
+    
+    <!-- 生成bean的另一种形式：静态工厂方法 -->
+    <bean id="employeeFactory"  class="com.saoraozhe.spring.bean.BeanFactory"  factory-method="getEmployee">
+        <!-- 传递给工厂方法的参数 -->
+        <constructor-arg value="wenruolan"></constructor-arg>
+    </bean>
+    
+    <!-- 生成bean的另一种形式：非静态工厂方法 -->
+    <bean id="companyFactory"  class="com.saoraozhe.spring.bean.BeanFactory" >
+    </bean>
+    <bean id="factoryCompany" factory-bean="companyFactory"  factory-method="getCompany">
+        <!-- 传递给工厂方法的参数 -->
+        <constructor-arg value="zhongxing"></constructor-arg>
+    </bean>
+    
+     <!-- 生成bean的另一种形式：实现Spring框架的接口，FactoryBean -->
+    <bean id="EmployeeFactoryBean"  class="com.saoraozhe.spring.bean.MyFactoryBean">
+        <!-- 传递给工厂方法的参数 -->
+        <property name="name" value="EmployeeFactoryBean"></property>
+    </bean>
 </beans>

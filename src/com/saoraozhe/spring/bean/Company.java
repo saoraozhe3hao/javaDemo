@@ -7,6 +7,9 @@ public class Company {
 
 	private String name;
 	
+	//福利好坏
+	private String welfare;
+	
 	private Employee employee;
 	
 	private List<Employee> employees;
@@ -22,7 +25,14 @@ public class Company {
 		this.name = name;
 	}
 
+	public void onInit(){
+		System.out.println("company init");
+	}
 
+	public void onDestroy(){
+		System.out.println("company destroy");
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -30,6 +40,16 @@ public class Company {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+
+	public String getWelfare() {
+		return welfare;
+	}
+
+
+	public void setWelfare(String welfare) {
+		this.welfare = welfare;
 	}
 
 
@@ -64,9 +84,9 @@ public class Company {
 
 	@Override
 	public String toString() {
-		return "Company [name=" + name + ", employee=" + employee
-				+ ", employees=" + employees + ", employeeMap=" + employeeMap
-				+ "]";
+		return "Company [name=" + name + ", welfare=" + welfare + ", employee="
+				+ employee + ", employees=" + employees + ", employeeMap="
+				+ employeeMap + "]";
 	}
 	
 }
